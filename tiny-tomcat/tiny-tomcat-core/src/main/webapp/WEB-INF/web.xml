@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<web>
+
+    <servlets>
+        <servlet>
+            <main-class>com.billy.jee.tinytomcat.demo.servlets.MainServlet</main-class>
+            <url-pattern>/main</url-pattern>
+        </servlet>
+    </servlets>
+</web>

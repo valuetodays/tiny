@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+
+<mapper namespace="test.billy.jee.tinymybatis.dao.DemoDAO">
+    <sql id="all_columns">
+        title, name, id, type
+    </sql>
+    <select id="hello">
+        select title from t_demo
+    </select>
+    <select id="getById">
+        select title from t_demo where id=${id}
+    </select>
+    <select id="getByEntity" resultType="demoEntity">
+        select * from t_demo where id=#{id} and name=#{name}
+    </select>
+    <select id="getByEntityWithIf" resultType="demoEntity">
+        select * from t_demo where id=#{id} <if test="type != null">  and type=#{type}</if>
+    </select>
+    <select id="getByIdWithInclude" resultType="demoEntity">
+        select <include refid="all_columns"/> from t_demo where id=#{id}
+    </select>
+
+</mapper>

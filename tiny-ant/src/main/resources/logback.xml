@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="appName" value="TinyAnt"/>
+    <property name="loghome" value="c:/tmp/${appName}-logs"/>
+
+    <!-- 控制台输出日志 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>[${appName}]%d{MM-dd HH:mm:ss} [%thread] %-5level %logger{36}:%L - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <!-- 总日志 -->
+     <appender name="FILE_ALL"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${loghome}/${appName}_all.log</file>
+        <encoder>
+            <pattern>${appName} %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36}:%L - %msg%n
+            </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${loghome}/${appName}_all.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+            <CleanHistoryOnStart>true</CleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="billy.tinyant" level="DEBUG">
+        <appender-ref ref="FILE_ALL"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+</configuration>

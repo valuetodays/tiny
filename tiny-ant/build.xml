@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="helloProject" default="hello">
+
+    <!--
+  <target name="before">
+    <echo message="this is before"></echo>
+  </target> -->
+
+    <property name="scondition" value="false"/>
+    <property name="msg" value="welcome to ant1.1"/>
+
+    <target name="hello" depends="hello1, hello2">
+        <!-- 1.1中不支持condition任务 -->
+        <!--<condition property="scondition">
+            <istrue value="false" />
+        </condition>-->
+        <!-- echo 打印一条文本信息，文本信息中可能有变量（由property定义） -->
+        <echo message="${msg}"/>
+        <echo message="to mkdir 'tmp' in c:/"/>
+        <mkdir dir="c:/tmp"/>
+        <echo message="create a new file ddd.dat in 'c:/tmp' "/>
+        <!-- 创建一个新文件，如果目标文件存在则不创新 -->
+        <touch file="c:/tmp/ddd.dat"/>
+    </target>
+
+    <target name="hello1" depends="hello2">
+        <echo message="hello1"/>
+    </target>
+
+    <!-- target中的if的条件是该字符串在系统中有属性（和属性值无关）即为true，否则即为false，见上面的<property name="scondition" -->
+    <target name="hello2" if="scondition">
+        <echo message="hello2"/>
+    </target>
+
+    <target name="unused">
+        <echo message="unused target"/>
+    </target>
+
+</project>
